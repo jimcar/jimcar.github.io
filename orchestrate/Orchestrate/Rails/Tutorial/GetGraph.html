@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Orchestrate::Rails::Tutorial::GetGraph - RDoc Documentation</title>
+
+<link href="../../../fonts.css" rel="stylesheet">
+<link href="../../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/navigation.js"></script>
+<script src="../../../js/search_index.js"></script>
+<script src="../../../js/search.js"></script>
+<script src="../../../js/searcher.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Getting+an+Orchestrate.io+graph">Getting an Orchestrate.io graph</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+Film+model+for+orchestrate.io+graphs.">Updating the <em>Film</em> model for orchestrate.io graphs.</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+films+controller.">Updating the <em>films</em> controller.</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+view+to+display+sequel+relations.">Updating the view to display sequel relations.</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Let%27s+check+it+out">Let&#39;s check it out</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Next">Next</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Orchestrate::Rails::Tutorial::GetGraph">
+  <h1 id="module-Orchestrate::Rails::Tutorial::GetGraph" class="module">
+    module Orchestrate::Rails::Tutorial::GetGraph
+  </h1>
+
+  <section class="description">
+    
+<h2 id="module-Orchestrate::Rails::Tutorial::GetGraph-label-Getting+an+Orchestrate.io+graph">Getting an Orchestrate.io graph<span><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Getting+an+Orchestrate.io+graph">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<p>The <em>films</em> example application includes a feature to define a
+<code>sequel</code> relationship between films. This feature is implemented
+using graphs. Since orchestrate.io <em>relations don&#39;t have a depth
+limit</em>, we&#39;ll even be adding a method to get the
+<strong>sequel&#39;s sequel!</strong></p>
+
+<h3 id="module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+Film+model+for+orchestrate.io+graphs.">Updating the <em>Film</em> model for orchestrate.io graphs.<span><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+Film+model+for+orchestrate.io+graphs.">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Update <code>&lt;rails-root&gt;/app/models/film.rb</code> to add the
+methods that get the <em>film</em> collection&#39;s <code>sequel</code>
+graph relations.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Film</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Orchestrate</span><span class="ruby-operator">::</span><span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Model</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">comments</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">events</span>(<span class="ruby-string">&#39;comments&#39;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">sequels</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">graph</span>(<span class="ruby-string">&#39;sequel&#39;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">spawn_of_sequels</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">graph</span>(<span class="ruby-string">&#39;sequel/sequel&#39;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h3 id="module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+films+controller.">Updating the <em>films</em> controller.<span><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+films+controller.">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Update <code>&lt;rails-root&gt;/app/controllers/films_controller.rb</code>
+to call the <code>sequel</code> instance methods from the <code>show</code>
+action:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">FilmsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-ivar">@films</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+    <span class="ruby-ivar">@film</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">find</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>]
+    <span class="ruby-ivar">@comments</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">comments</span>
+    <span class="ruby-ivar">@sequels</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">sequels</span>
+    <span class="ruby-ivar">@spawn_of_sequels</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">spawn_of_sequels</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h3 id="module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+view+to+display+sequel+relations.">Updating the view to display sequel relations.<span><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Updating+the+view+to+display+sequel+relations.">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Update <code>&lt;rails-root&gt;/app/views/films/show.html.haml</code> as
+shown:</p>
+
+<pre>%ul.films.list-group
+ %li.list-group-item
+  %h3.list-group-item-heading= @film.title
+  %ul.list-group
+   %li.list-group-item
+    = render partial: &#39;films/film_info&#39;
+   - if @sequels and @sequels.length &gt; 0
+    %li.list-group-item
+     = render partial: &#39;films/film_list&#39;, locals: { title: &quot;Sequels&quot;, films: @sequels }
+   - if @spawn_of_sequels and @spawn_of_sequels.length &gt; 0
+    %li.list-group-item
+     = render partial: &#39;films/film_list&#39;, locals: { title: &quot;Sequel Spawn&quot;, films: @spawn_of_sequels }
+   - if @comments and @comments.length &gt; 0
+    %li.list-group-item
+     = render partial: &#39;films/comments&#39;, locals: { comments: @comments }</pre>
+
+<h3 id="module-Orchestrate::Rails::Tutorial::GetGraph-label-Let%27s+check+it+out">Let&#39;s check it out<span><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Let%27s+check+it+out">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Navigate to “The Godfather” to see its sequels.</p>
+
+<p>If you ran the demo app to populate the collection, you can also check out
+“Star Wars”.</p>
+
+<h3 id="module-Orchestrate::Rails::Tutorial::GetGraph-label-Next">Next<span><a href="#module-Orchestrate::Rails::Tutorial::GetGraph-label-Next">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p><strong><a href="TheCreateAction.html">Adding the create
+action</a></strong></p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
