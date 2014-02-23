@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Orchestrate::Application::Result - RDoc Documentation</title>
+
+<link href="../../fonts.css" rel="stylesheet">
+<link href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/navigation.js"></script>
+<script src="../../js/search_index.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/searcher.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Object
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-result">#result</a>
+    
+    <li ><a href="#method-i-success-3F">#success?</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Orchestrate::Application::Result">
+  <h1 id="class-Orchestrate::Application::Result" class="class">
+    class Orchestrate::Application::Result
+  </h1>
+
+  <section class="description">
+    
+<p>Packages the result data from GET requests. Orchestrate.io records are
+returned as <a href="Document.html">Document</a> objects.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-count" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">count</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Count of documents in <a
+href="Result.html#attribute-i-results">results</a>. Set for list, search,
+events, and graph.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-next" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">next</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Set for list results.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-response" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">response</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Upon success: the result data is extracted from the response body, but the
+response body itself is not inluded as part of the result.</p>
+
+<p>Upon failure: the original response body, <a
+href="../API/ResponseBody.html">Orchestrate::API::ResponseBody</a> is left
+intact and included to provide access to the error details.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-results" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">results</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Array of <a href="Document.html">Document</a> objects.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-status" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">status</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Boolean: return status of the api call.</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(results)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initialize instance variables, based on type of results.</p>
+<ul><li>
+<p>results                     (key/value)</p>
+</li><li>
+<p>results, count              (events, graph)</p>
+</li><li>
+<p>results, count, next        (list)</p>
+</li><li>
+<p>results, count, total_count (search)</p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/result.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">results</span>)
+  <span class="ruby-identifier">results</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">instance_variable_set</span> <span class="ruby-node">&quot;@#{k}&quot;</span>, <span class="ruby-identifier">v</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-result" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">result</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="result-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/result.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">result</span>
+    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-success-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">success?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="success-3F-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/result.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">success?</span>
+  <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

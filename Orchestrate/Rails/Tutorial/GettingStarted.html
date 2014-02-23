@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Orchestrate::Rails::Tutorial::GettingStarted - RDoc Documentation</title>
+
+<link href="../../../fonts.css" rel="stylesheet">
+<link href="../../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/navigation.js"></script>
+<script src="../../../js/search_index.js"></script>
+<script src="../../../js/search.js"></script>
+<script src="../../../js/searcher.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GettingStarted-label-Getting+started+with+orchestrate-rails">Getting started with orchestrate-rails</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GettingStarted-label-Signing+up+for+Orchestrate.io">Signing up for Orchestrate.io</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GettingStarted-label-Creating+the+configuration+file">Creating the configuration file</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::GettingStarted-label-Next">Next</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Orchestrate::Rails::Tutorial::GettingStarted">
+  <h1 id="module-Orchestrate::Rails::Tutorial::GettingStarted" class="module">
+    module Orchestrate::Rails::Tutorial::GettingStarted
+  </h1>
+
+  <section class="description">
+    
+<h2 id="module-Orchestrate::Rails::Tutorial::GettingStarted-label-Getting+started+with+orchestrate-rails">Getting started with orchestrate-rails<span><a href="#module-Orchestrate::Rails::Tutorial::GettingStarted-label-Getting+started+with+orchestrate-rails">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<p>Orchestrate.io offers a <em>free developer tier</em> that makes it easy to
+start integrating DBaaS into your rails applications.</p>
+
+<h3 id="module-Orchestrate::Rails::Tutorial::GettingStarted-label-Signing+up+for+Orchestrate.io">Signing up for Orchestrate.io<span><a href="#module-Orchestrate::Rails::Tutorial::GettingStarted-label-Signing+up+for+Orchestrate.io">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<ol><li>
+<p>Go to <strong><a href="http://orchestrate.io">orchestrate.io</a></strong>
+to set up an account.</p>
+</li><li>
+<p>Check out the <strong><a href="http://orchestrate.io/docs/">orchestrate.io
+docs and tutorial</a></strong>.</p>
+</li><li>
+<p>Create an application using the <strong><a
+href="https://dashboard.orchestrate.io">orchestrate.io
+dashboard</a></strong>.</p>
+</li><li>
+<p>You should now have a newly generated api-key for basic authentication.</p>
+</li></ol>
+
+<h3 id="module-Orchestrate::Rails::Tutorial::GettingStarted-label-Creating+the+configuration+file">Creating the configuration file<span><a href="#module-Orchestrate::Rails::Tutorial::GettingStarted-label-Creating+the+configuration+file">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Create the file, <code>orchestrate_config.json</code>, used to set up the
+orchestrate.io client. Replace the value of <code>user</code> with the
+<code>api-key</code> that was generated when you created the <em>films</em>
+application:</p>
+
+<pre>{
+  &quot;base_url&quot;:&quot;https://api.orchestrate.io/v0&quot;,
+  &quot;user&quot;:&quot;put-api-key-from-orchestrate.io-here&quot;,
+  &quot;verbose&quot;:&quot;true&quot;
+}</pre>
+
+<h3 id="module-Orchestrate::Rails::Tutorial::GettingStarted-label-Next">Next<span><a href="#module-Orchestrate::Rails::Tutorial::GettingStarted-label-Next">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p><strong><a href="PopulateFilmsCollection.html">Populating the films
+collection</a></strong></p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

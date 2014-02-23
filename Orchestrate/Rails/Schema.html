@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Orchestrate::Rails::Schema - RDoc Documentation</title>
+
+<link href="../../fonts.css" rel="stylesheet">
+<link href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/navigation.js"></script>
+<script src="../../js/search_index.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/searcher.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Application/Schema.html">Orchestrate::Application::Schema</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Singleton</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-build_attr_map">::build_attr_map</a>
+    
+    <li ><a href="#method-c-define_collection">::define_collection</a>
+    
+    <li ><a href="#method-c-define_event_type">::define_event_type</a>
+    
+    <li ><a href="#method-c-define_graph">::define_graph</a>
+    
+    <li ><a href="#method-c-load">::load</a>
+    
+    <li ><a href="#method-i-attr_map">#attr_map</a>
+    
+    <li ><a href="#method-i-attrs">#attrs</a>
+    
+    <li ><a href="#method-i-build_query_map">#build_query_map</a>
+    
+    <li ><a href="#method-i-classname">#classname</a>
+    
+    <li ><a href="#method-i-fullclassname">#fullclassname</a>
+    
+    <li ><a href="#method-i-get_collection_from_class">#get_collection_from_class</a>
+    
+    <li ><a href="#method-i-properties">#properties</a>
+    
+    <li ><a href="#method-i-qmap">#qmap</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Orchestrate::Rails::Schema">
+  <h1 id="class-Orchestrate::Rails::Schema" class="class">
+    class Orchestrate::Rails::Schema
+  </h1>
+
+  <section class="description">
+    
+<p>Extensions to parent class for mapping data between orchestrate and rails.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-define_collection" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">define_collection</span><span
+            class="method-args">(args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>args: { :name, :properties, :event_types, :graphs, :classname }</p>
+          
+          
+
+          
+          <div class="method-source-code" id="define_collection-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">define_collection</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-comment"># puts &quot;DEF_COLL: &#39;#{args.inspect}&#39;&quot;</span>
+  <span class="ruby-identifier">coll</span> = <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">load_collection</span> <span class="ruby-constant">SchemaCollection</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">args</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">classname</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">:classname</span>]
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">classpath</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">:classpath</span>] <span class="ruby-comment">#unless args[:classpath].blank?</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">attr_map</span> = <span class="ruby-identifier">build_attr_map</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:properties</span>]
+  }
+  <span class="ruby-comment"># puts &quot;DEF_COLL: &#39;#{coll.classpath}&#39;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-define_event_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">define_event_type</span><span
+            class="method-args">(args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="define_event_type-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">define_event_type</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-comment"># puts &quot;DEFINE: inst = &#39;#{instance}&#39;, &#39;#{args[:collection]}&#39;&quot;  #JMC</span>
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">define_event_type</span>(
+    <span class="ruby-identifier">args</span>[<span class="ruby-value">:collection</span>], <span class="ruby-identifier">args</span>[<span class="ruby-value">:event_type</span>], <span class="ruby-identifier">args</span>[<span class="ruby-value">:properties</span>]
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-define_graph" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">define_graph</span><span
+            class="method-args">(args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="define_graph-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">define_graph</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">define_graph</span>(
+    <span class="ruby-identifier">args</span>[<span class="ruby-value">:collection</span>], <span class="ruby-identifier">args</span>[<span class="ruby-value">:relation_kind</span>], <span class="ruby-identifier">args</span>[<span class="ruby-value">:to_collection</span>]
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-load" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">load</span><span
+            class="method-args">(schema)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="load-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">schema</span>)
+  <span class="ruby-identifier">require</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">join</span> <span class="ruby-identifier">schema</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-build_attr_map" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">build_attr_map</span><span
+            class="method-args">(attrs)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="build_attr_map-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">build_attr_map</span>(<span class="ruby-identifier">attrs</span>)
+  <span class="ruby-identifier">attr_map</span> = {}
+  <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">attr_map</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_orchio_rails_attr</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_s</span>) }.<span class="ruby-identifier">last</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-attr_map" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">attr_map</span><span
+            class="method-args">(collection_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the table that maps attribute names to property names.</p>
+
+<p>Property names are the original key names in json documents stored in
+orchestrate collections - before they are converted to the snake_case style
+used for model attribute names. Property names can be mapped to attribute
+names by using <a
+href="../../String.html#method-i-to_orchio_rails_attr">String#to_orchio_rails_attr</a>
+or <a
+href="../../Symbol.html#method-i-to_orchio_rails_attr">Symbol#to_orchio_rails_attr</a>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="attr_map-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">attr_map</span>(<span class="ruby-identifier">collection_name</span>)
+  <span class="ruby-identifier">get_collection</span>(<span class="ruby-identifier">collection_name</span>).<span class="ruby-identifier">attr_map</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-attrs" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">attrs</span><span
+            class="method-args">(collection_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="attrs-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">attrs</span>(<span class="ruby-identifier">collection_name</span>)
+  <span class="ruby-identifier">get_collection</span>(<span class="ruby-identifier">collection_name</span>).<span class="ruby-identifier">attr_map</span>.<span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-classname" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">classname</span><span
+            class="method-args">(collection_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="classname-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">classname</span>(<span class="ruby-identifier">collection_name</span>)
+  <span class="ruby-identifier">get_collection</span>(<span class="ruby-identifier">collection_name</span>).<span class="ruby-identifier">classname</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-fullclassname" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fullclassname</span><span
+            class="method-args">(collection_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fullclassname-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fullclassname</span>(<span class="ruby-identifier">collection_name</span>)
+  <span class="ruby-identifier">c</span> = <span class="ruby-identifier">get_collection</span>(<span class="ruby-identifier">collection_name</span>)
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">classpath</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">classname</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{c.classpath}::#{c.classname}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_collection_from_class" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_collection_from_class</span><span
+            class="method-args">(classname)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_collection_from_class-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_collection_from_class</span>(<span class="ruby-identifier">classname</span>)
+  <span class="ruby-identifier">classname</span> = <span class="ruby-identifier">classname</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;::&#39;</span>).<span class="ruby-identifier">last</span>
+  <span class="ruby-identifier">collections</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-keyword">return</span> <span class="ruby-identifier">c</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">classname</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">classname</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-properties" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">properties</span><span
+            class="method-args">(collection_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="properties-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">properties</span>(<span class="ruby-identifier">collection_name</span>)
+  <span class="ruby-identifier">get_collection</span>(<span class="ruby-identifier">collection_name</span>).<span class="ruby-identifier">properties</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-qmap" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">qmap</span><span
+            class="method-args">(collection_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a table that maps attribute names to property names. And the
+mapping conveniently works even when the attribute name is actually a
+property name.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="qmap-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">qmap</span>(<span class="ruby-identifier">collection_name</span>)
+  <span class="ruby-identifier">get_collection</span>(<span class="ruby-identifier">collection_name</span>).<span class="ruby-identifier">qmap</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">build_query_map</span>(<span class="ruby-identifier">collection_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-build_query_map" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">build_query_map</span><span
+            class="method-args">(collection)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="build_query_map-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/schema.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">build_query_map</span>(<span class="ruby-identifier">collection</span>)
+  <span class="ruby-identifier">q_map</span> = {}
+  <span class="ruby-identifier">attr_map</span>(<span class="ruby-identifier">collection</span>).<span class="ruby-identifier">values</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">q_map</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">a</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">a</span>, <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_orchio_rails_attr</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">a</span>)
+  }.<span class="ruby-identifier">last</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
