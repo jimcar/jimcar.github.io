@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Orchestrate::API::Error - RDoc Documentation</title>
+<title>module Orchestrate::API::Error - Ruby / Orchestrate.io</title>
 
 <link href="../../fonts.css" rel="stylesheet">
 <link href="../../rdoc.css" rel="stylesheet">
@@ -125,52 +125,52 @@
           <div class="method-source-code" id="errors-source">
             <pre><span class="ruby-comment"># File api/lib/orchestrate_api/errors.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">errors</span>
-        <span class="ruby-identifier">@@errors</span> <span class="ruby-operator">||=</span> [
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">400</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:api_bad_request</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The API request is malformed.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">500</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:security_authentication</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;An error occurred while trying to authenticate.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">401</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:security_unauthorized</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Valid credentials are required.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">400</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:search_param_invalid</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;A provided search query param is invalid.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">500</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:search_index_not_found</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Index could not be queried for this application.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">500</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:internal_error</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Internal Error.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">404</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:items_not_found</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The requested items could not be found.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">412</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:item_version_mismatch</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The version of the item does not match.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">412</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:item_already_present</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The item is already present.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">400</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:item_ref_malformed</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The provided Item Ref is malformed.&#39;</span>
-                },
-                { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">409</span>,
-                  <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:indexing_conflict</span>,
-                  <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The item has been stored but conflicts were detected &#39;</span> <span class="ruby-operator">+</span>
-                             <span class="ruby-string">&#39;when indexing. Conflicting fields have not been indexed.&#39;</span>
-                },
+  <span class="ruby-identifier">@@errors</span> <span class="ruby-operator">||=</span> [
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">400</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:api_bad_request</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The API request is malformed.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">500</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:security_authentication</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;An error occurred while trying to authenticate.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">401</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:security_unauthorized</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Valid credentials are required.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">400</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:search_param_invalid</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;A provided search query param is invalid.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">500</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:search_index_not_found</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Index could not be queried for this application.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">500</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:internal_error</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Internal Error.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">404</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:items_not_found</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The requested items could not be found.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">412</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:item_version_mismatch</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The version of the item does not match.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">412</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:item_already_present</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The item is already present.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">400</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:item_ref_malformed</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The provided Item Ref is malformed.&#39;</span>
+    },
+    { <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">409</span>,
+      <span class="ruby-value">:code</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:indexing_conflict</span>,
+      <span class="ruby-value">:desc</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;The item has been stored but conflicts were detected &#39;</span> <span class="ruby-operator">+</span>
+                 <span class="ruby-string">&#39;when indexing. Conflicting fields have not been indexed.&#39;</span>
+    },
 ]
 <span class="ruby-keyword">end</span></pre>
           </div>

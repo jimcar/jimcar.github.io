@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Orchestrate::Rails::Event - RDoc Documentation</title>
+<title>class Orchestrate::Rails::Event - Ruby / Orchestrate.io</title>
 
 <link href="../../fonts.css" rel="stylesheet">
 <link href="../../rdoc.css" rel="stylesheet">
@@ -154,7 +154,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/event.rb, line 9</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/event.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">event_record</span>)
   <span class="ruby-identifier">event_record</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:attr_reader</span>, <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_orchio_rails_attr</span>)
@@ -198,7 +198,7 @@
 
           
           <div class="method-source-code" id="id-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/event.rb, line 16</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/event.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@timestamp</span>
 <span class="ruby-keyword">end</span></pre>

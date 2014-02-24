@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Orchestrate::API::Wrapper - RDoc Documentation</title>
+<title>class Orchestrate::API::Wrapper - Ruby / Orchestrate.io</title>
 
 <link href="../../fonts.css" rel="stylesheet">
 <link href="../../rdoc.css" rel="stylesheet">
@@ -185,10 +185,10 @@ be used for subsequent requests.</p>
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File api/lib/orchestrate_api/wrapper.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config_file</span>)
-        <span class="ruby-identifier">orch_config</span> = <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>.<span class="ruby-identifier">decode</span> <span class="ruby-identifier">open</span>(<span class="ruby-identifier">config_file</span>).<span class="ruby-identifier">read</span>
-        <span class="ruby-ivar">@base_url</span> = <span class="ruby-identifier">orch_config</span>[<span class="ruby-string">&#39;base_url&#39;</span>]
-        <span class="ruby-ivar">@user</span>     = <span class="ruby-identifier">orch_config</span>[<span class="ruby-string">&#39;user&#39;</span>]
-        <span class="ruby-ivar">@verbose</span>  = <span class="ruby-identifier">orch_config</span>[<span class="ruby-string">&#39;verbose&#39;</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">orch_config</span>[<span class="ruby-string">&#39;verbose&#39;</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">orch_config</span> = <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>.<span class="ruby-identifier">decode</span> <span class="ruby-identifier">open</span>(<span class="ruby-identifier">config_file</span>).<span class="ruby-identifier">read</span>
+  <span class="ruby-ivar">@base_url</span> = <span class="ruby-identifier">orch_config</span>[<span class="ruby-string">&#39;base_url&#39;</span>]
+  <span class="ruby-ivar">@user</span>     = <span class="ruby-identifier">orch_config</span>[<span class="ruby-string">&#39;user&#39;</span>]
+  <span class="ruby-ivar">@verbose</span>  = <span class="ruby-identifier">orch_config</span>[<span class="ruby-string">&#39;verbose&#39;</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">orch_config</span>[<span class="ruby-string">&#39;verbose&#39;</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -231,12 +231,12 @@ href="Response.html">Response</a> object.</p>
           <div class="method-source-code" id="send_request-source">
             <pre><span class="ruby-comment"># File api/lib/orchestrate_api/wrapper.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_request</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">args</span>)
-        <span class="ruby-identifier">request</span> = <span class="ruby-constant">Orchestrate</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">args</span>), <span class="ruby-ivar">@user</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">r</span>.<span class="ruby-identifier">data</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">:json</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:json</span>]
-                <span class="ruby-identifier">r</span>.<span class="ruby-identifier">ref</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">:ref</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:ref</span>]
-                <span class="ruby-identifier">r</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-identifier">verbose</span>
-        <span class="ruby-keyword">end</span>
-        <span class="ruby-identifier">request</span>.<span class="ruby-identifier">perform</span>
+  <span class="ruby-identifier">request</span> = <span class="ruby-constant">Orchestrate</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">args</span>), <span class="ruby-ivar">@user</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">r</span>.<span class="ruby-identifier">data</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">:json</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:json</span>]
+    <span class="ruby-identifier">r</span>.<span class="ruby-identifier">ref</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">:ref</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:ref</span>]
+    <span class="ruby-identifier">r</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-identifier">verbose</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">request</span>.<span class="ruby-identifier">perform</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -277,31 +277,31 @@ href="Response.html">Response</a> object.</p>
           <div class="method-source-code" id="build_url-source">
             <pre><span class="ruby-comment"># File api/lib/orchestrate_api/wrapper.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">args</span>)
-        <span class="ruby-identifier">uri</span> = <span class="ruby-node">&quot;#{@base_url}/#{args[:collection]}&quot;</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:key</span>]
-                <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/#{args[:key]}&quot;</span>
-                <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:ref</span>]
-                        <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/refs/#{args[:ref].gsub(/&quot;/, &#39;&#39;)}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:get</span>
-                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:event_type</span>]
-                        <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/events/#{args[:event_type]}&quot;</span>
-                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:timestamp</span>]
-                          <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:put</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:timestamp</span>][<span class="ruby-value">:start</span>]
-                                  <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;?start=#{args[:timestamp][:start]}&amp;end=#{args[:timestamp][:end]}&quot;</span>
-                          <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:get</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">args</span>[<span class="ruby-value">:timestamp</span>].<span class="ruby-identifier">blank?</span>
-                                  <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;?timestamp=#{timestamp}&quot;</span>
-                                <span class="ruby-keyword">end</span>
-                        <span class="ruby-keyword">end</span>
-                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:kind</span>]
-                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:put</span>
-                                <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/relation/#{args[:kind]}/#{args[:to_collection]}/#{args[:to_key]}&quot;</span>
-                        <span class="ruby-keyword">else</span>
-                                <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/relations/#{args[:kind]}&quot;</span>
-                        <span class="ruby-keyword">end</span>
-                <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:path</span>]
-                <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:path</span>]
+  <span class="ruby-identifier">uri</span> = <span class="ruby-node">&quot;#{@base_url}/#{args[:collection]}&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:key</span>]
+    <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/#{args[:key]}&quot;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:ref</span>]
+      <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/refs/#{args[:ref].gsub(/&quot;/, &#39;&#39;)}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:get</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:event_type</span>]
+      <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/events/#{args[:event_type]}&quot;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:timestamp</span>]
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:put</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:timestamp</span>][<span class="ruby-value">:start</span>]
+          <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;?start=#{args[:timestamp][:start]}&amp;end=#{args[:timestamp][:end]}&quot;</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:get</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">args</span>[<span class="ruby-value">:timestamp</span>].<span class="ruby-identifier">blank?</span>
+          <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;?timestamp=#{timestamp}&quot;</span>
         <span class="ruby-keyword">end</span>
-        <span class="ruby-identifier">uri</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:kind</span>]
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:put</span>
+        <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/relation/#{args[:kind]}/#{args[:to_collection]}/#{args[:to_key]}&quot;</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/relations/#{args[:kind]}&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:path</span>]
+    <span class="ruby-identifier">uri</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:path</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">uri</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
