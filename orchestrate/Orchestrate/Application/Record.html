@@ -119,6 +119,8 @@
     
     <li ><a href="#method-i-orchio_get_graph">#orchio_get_graph</a>
     
+    <li ><a href="#method-i-orchio_purge">#orchio_purge</a>
+    
     <li ><a href="#method-i-orchio_put">#orchio_put</a>
     
     <li ><a href="#method-i-orchio_put_event">#orchio_put_event</a>
@@ -266,7 +268,7 @@ orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="orchio_delete-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 99</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">orchio_delete</span>(<span class="ruby-identifier">collection</span>)
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span>(
     <span class="ruby-value">:delete</span>, { <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;?force=true&quot;</span> }
@@ -303,7 +305,7 @@ orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="orchio_delete_key-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 108</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">orchio_delete_key</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-identifier">key</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>).<span class="ruby-identifier">orchio_delete</span>
 <span class="ruby-keyword">end</span></pre>
@@ -337,7 +339,7 @@ orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="orchio_list-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 80</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">orchio_list</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-identifier">path</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, { <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-identifier">path</span> }
   <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(
@@ -346,13 +348,13 @@ orchestrate.io collection.</p>
     <span class="ruby-identifier">count</span><span class="ruby-operator">:</span>    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">count</span>,
     <span class="ruby-value">:next</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">next</span>,
     <span class="ruby-identifier">results</span><span class="ruby-operator">:</span>  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span><span class="ruby-operator">|</span>
-                 <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(
-                   <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;value&#39;</span>].<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>]),
-                   {
-                      <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;collection&#39;</span>],
-                      <span class="ruby-identifier">key</span><span class="ruby-operator">:</span>        <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>],
-                      <span class="ruby-identifier">ref</span><span class="ruby-operator">:</span>        <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;ref&#39;</span>],
-                   }
+                <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(
+                  <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;value&#39;</span>].<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>]),
+                  <span class="ruby-constant">Metadata</span>.<span class="ruby-identifier">new</span>(
+                    <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;collection&#39;</span>],
+                    <span class="ruby-identifier">key</span><span class="ruby-operator">:</span>        <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>],
+                    <span class="ruby-identifier">ref</span><span class="ruby-operator">:</span>        <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;ref&#39;</span>],
+                  )
   )})
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -391,7 +393,7 @@ href="Document.html">Document</a> objects.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">orchio_search</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-identifier">query_str</span>)
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span>( <span class="ruby-value">:get</span>, {
     <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">collection</span>,
-    <span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;/?query=#{query_str.gsub(/\s/, &#39;%20&#39;)}&quot;</span>
+    <span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;?query=#{query_str.gsub(/\s/, &#39;%20&#39;)}&quot;</span>
   })
 
   <span class="ruby-constant">SearchResult</span>.<span class="ruby-identifier">new</span>(
@@ -402,13 +404,12 @@ href="Document.html">Document</a> objects.</p>
     <span class="ruby-identifier">results</span><span class="ruby-operator">:</span>     <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span><span class="ruby-operator">|</span>
                    <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(
                      <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;value&#39;</span>].<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>]),
-                     {
+                     <span class="ruby-constant">Metadata</span>.<span class="ruby-identifier">new</span>(
                         <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;collection&#39;</span>],
                         <span class="ruby-identifier">key</span><span class="ruby-operator">:</span>        <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>],
                         <span class="ruby-identifier">ref</span><span class="ruby-operator">:</span>        <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;ref&#39;</span>],
                         <span class="ruby-identifier">score</span><span class="ruby-operator">:</span>      <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;score&#39;</span>]
-                     }
-  )})
+  ))})
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -447,7 +448,7 @@ href="Document.html">Document</a> objects.</p>
 
           
           <div class="method-source-code" id="client-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 404</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 419</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">client</span>
   <span class="ruby-identifier">new</span>.<span class="ruby-identifier">orchestrate_client</span>
 <span class="ruby-keyword">end</span></pre>
@@ -482,7 +483,7 @@ in the <a href="Result.html">Result</a> object.</p>
 
           
           <div class="method-source-code" id="sanitize-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 411</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 426</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sanitize</span>(<span class="ruby-identifier">response</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">code</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span>
     <span class="ruby-constant">Response</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
@@ -531,7 +532,7 @@ in the <a href="Result.html">Result</a> object.</p>
 
           
           <div class="method-source-code" id="orchestrate_client-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 306</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 321</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchestrate_client</span>
   <span class="ruby-identifier">client</span>
 <span class="ruby-keyword">end</span></pre>
@@ -564,7 +565,7 @@ in the <a href="Result.html">Result</a> object.</p>
 
           
           <div class="method-source-code" id="orchestrate_collection_name-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 289</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 304</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchestrate_collection_name</span>
   <span class="ruby-identifier">ocollection</span>
 <span class="ruby-keyword">end</span></pre>
@@ -597,7 +598,7 @@ in the <a href="Result.html">Result</a> object.</p>
 
           
           <div class="method-source-code" id="orchestrate_primary_key-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 301</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 316</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchestrate_primary_key</span>
   <span class="ruby-identifier">id</span>
 <span class="ruby-keyword">end</span></pre>
@@ -632,7 +633,7 @@ primary_key data in an orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="orchestrate_ref_value-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 296</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 311</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchestrate_ref_value</span>
   <span class="ruby-identifier">__ref_value__</span>
 <span class="ruby-keyword">end</span></pre>
@@ -666,7 +667,7 @@ collection.</p>
 
           
           <div class="method-source-code" id="orchio_delete-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 151</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_delete</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value">:delete</span>, <span class="ruby-identifier">inst_args</span>
   <span class="ruby-identifier">orchio_status</span> <span class="ruby-identifier">response</span>, <span class="ruby-value">204</span>
@@ -700,23 +701,26 @@ collection.</p>
 
           
           <div class="method-source-code" id="orchio_get-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 116</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_get</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">enabled?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">response</span> = <span class="ruby-identifier">cache_request</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">id</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value">:cache</span>
       <span class="ruby-identifier">doc</span> = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">document</span>
-      <span class="ruby-comment"># puts &quot;          doc = &#39;#{doc}&#39;&quot;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">inst_args</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_hash</span>, {
-            <span class="ruby-value">:collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ocollection</span>,
-            <span class="ruby-value">:key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@id</span>,
-            <span class="ruby-value">:ref</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">etag</span>
-          })
+    <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(
+            <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_hash</span>,
+            <span class="ruby-constant">Metadata</span>.<span class="ruby-identifier">new</span>(
+              <span class="ruby-value">:collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ocollection</span>,
+              <span class="ruby-value">:key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@id</span>,
+              <span class="ruby-value">:ref</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">etag</span>
+          ))
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(
-    <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-identifier">orchio_status</span>(<span class="ruby-identifier">response</span>, <span class="ruby-value">200</span>), <span class="ruby-identifier">response</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>, <span class="ruby-identifier">results</span><span class="ruby-operator">:</span> [ <span class="ruby-identifier">doc</span> ]
+    <span class="ruby-identifier">status</span><span class="ruby-operator">:</span>   <span class="ruby-identifier">orchio_status</span>(<span class="ruby-identifier">response</span>, <span class="ruby-value">200</span>),
+    <span class="ruby-identifier">response</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>,
+    <span class="ruby-identifier">results</span><span class="ruby-operator">:</span>  [ <span class="ruby-identifier">doc</span> ]
   )
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -748,17 +752,19 @@ collection.</p>
 
           
           <div class="method-source-code" id="orchio_get_by_ref-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 160</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_get_by_ref</span>(<span class="ruby-identifier">ref</span>)
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">inst_args</span>(<span class="ruby-identifier">ref</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ref</span>)
   <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(
     <span class="ruby-identifier">status</span><span class="ruby-operator">:</span>   <span class="ruby-identifier">orchio_status</span>(<span class="ruby-identifier">response</span>, <span class="ruby-value">200</span>),
     <span class="ruby-identifier">response</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>,
-    <span class="ruby-identifier">results</span><span class="ruby-operator">:</span>  [ <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_hash</span>, {
-                <span class="ruby-value">:collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ocollection</span>,
-                <span class="ruby-value">:key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@id</span>,
-                <span class="ruby-value">:ref</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">etag</span>
-              })]
+    <span class="ruby-identifier">results</span><span class="ruby-operator">:</span>  [ <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(
+                  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_hash</span>,
+                  <span class="ruby-constant">Metadata</span>.<span class="ruby-identifier">new</span>(
+                    <span class="ruby-value">:collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ocollection</span>,
+                    <span class="ruby-value">:key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@id</span>,
+                    <span class="ruby-value">:ref</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">etag</span>
+              ))]
   )
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -791,7 +797,7 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
 
           
           <div class="method-source-code" id="orchio_get_events-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 191</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 205</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_get_events</span>(<span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span>={})
   <span class="ruby-comment"># add_event_type event_type</span>
 
@@ -810,11 +816,12 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
                   <span class="ruby-identifier">etype</span><span class="ruby-operator">:</span> <span class="ruby-identifier">event_type</span>,
                   <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;timestamp&#39;</span>]
                 ),
-                { <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ocollection</span>,
+                <span class="ruby-constant">Metadata</span>.<span class="ruby-identifier">new</span>(
+                  <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ocollection</span>,
                   <span class="ruby-identifier">key</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@id</span>,
                   <span class="ruby-identifier">ref</span><span class="ruby-operator">:</span> <span class="ruby-identifier">funkify</span>(<span class="ruby-node">&quot;#{event_type}#{result[&#39;timestamp&#39;]}&quot;</span>),
                   <span class="ruby-identifier">etype</span><span class="ruby-operator">:</span> <span class="ruby-identifier">event_type</span>,
-                }
+                )
             }
     <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">save_event</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">event_type</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">enabled?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   <span class="ruby-keyword">end</span>
@@ -854,7 +861,7 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
 
           
           <div class="method-source-code" id="orchio_get_graph-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 238</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 252</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_get_graph</span>(<span class="ruby-identifier">kind</span>)
   <span class="ruby-comment"># add_relation_kind kind</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">enabled?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">response</span> = <span class="ruby-identifier">cache_request</span>.<span class="ruby-identifier">get_graph</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">kind</span>)
@@ -865,15 +872,16 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">inst_args</span>(<span class="ruby-identifier">kind</span><span class="ruby-operator">:</span> <span class="ruby-identifier">kind</span>)
     <span class="ruby-identifier">docs</span> =  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span><span class="ruby-operator">|</span>
-              <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;value&#39;</span>].<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>]), {
-                <span class="ruby-value">:collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;collection&#39;</span>],
-                <span class="ruby-value">:key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>],
-                <span class="ruby-value">:ref</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;ref&#39;</span>],
-                <span class="ruby-value">:kind</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">kind</span>,
-                <span class="ruby-value">:from_collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ocollection</span>,
-                <span class="ruby-value">:from_key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@id</span>,
-              }
-            }
+              <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(
+                <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;value&#39;</span>].<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>]),
+                <span class="ruby-constant">Metadata</span>.<span class="ruby-identifier">new</span>(
+                  <span class="ruby-value">:collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;collection&#39;</span>],
+                  <span class="ruby-value">:key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;key&#39;</span>],
+                  <span class="ruby-value">:ref</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>[<span class="ruby-string">&#39;path&#39;</span>][<span class="ruby-string">&#39;ref&#39;</span>],
+                  <span class="ruby-value">:kind</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">kind</span>,
+                  <span class="ruby-value">:from_collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ocollection</span>,
+                  <span class="ruby-value">:from_key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@id</span>,
+            ))}
     <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">save_graph</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">kind</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">enabled?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(
@@ -882,6 +890,41 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
     <span class="ruby-identifier">count</span><span class="ruby-operator">:</span>    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">count</span>,
     <span class="ruby-identifier">results</span><span class="ruby-operator">:</span>  <span class="ruby-identifier">docs</span>
   )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-orchio_purge" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">orchio_purge</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Deletes the primary_key and <strong>purges all of its immutable
+data</strong> from the collection.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="orchio_purge-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_purge</span>
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value">:delete</span>, <span class="ruby-identifier">inst_args</span>(<span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;?purge=true&quot;</span>)
+  <span class="ruby-identifier">orchio_status</span> <span class="ruby-identifier">response</span>, <span class="ruby-value">204</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -912,15 +955,18 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
 
           
           <div class="method-source-code" id="orchio_put-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 136</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_put</span>(<span class="ruby-identifier">jdoc</span>)
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">inst_args</span>(<span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">jdoc</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">enabled?</span>
-    <span class="ruby-identifier">simple_cache</span>.<span class="ruby-identifier">save</span>( <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_hash</span>, {
-                  <span class="ruby-value">:collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ocollection</span>,
-                  <span class="ruby-value">:key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@id</span>,
-                  <span class="ruby-value">:ref</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">etag</span>
-    }))
+    <span class="ruby-identifier">simple_cache</span>.<span class="ruby-identifier">save</span>(
+      <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(
+        <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_hash</span>,
+        <span class="ruby-constant">Metadata</span>.<span class="ruby-identifier">new</span>(
+          <span class="ruby-value">:collection</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ocollection</span>,
+          <span class="ruby-value">:key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@id</span>,
+          <span class="ruby-value">:ref</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">etag</span>
+    )))
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">set_ref_value</span> <span class="ruby-identifier">response</span>
   <span class="ruby-identifier">orchio_status</span> <span class="ruby-identifier">response</span>, <span class="ruby-value">201</span>
@@ -954,10 +1000,9 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
 
           
           <div class="method-source-code" id="orchio_put_event-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 225</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 240</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_put_event</span>(<span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span>={}, <span class="ruby-identifier">document</span>)
   <span class="ruby-comment"># add_event_type event_type</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;JSON: &#39;#{event_type}&#39;, &#39;#{document}&#39;&quot;</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span>(<span class="ruby-value">:put</span>, <span class="ruby-identifier">inst_args</span>(
     <span class="ruby-identifier">event_type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">document</span>
   ))
@@ -993,7 +1038,7 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
 
           
           <div class="method-source-code" id="orchio_put_graph-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 269</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 284</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_put_graph</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">to_collection</span>, <span class="ruby-identifier">to_key</span>)
   <span class="ruby-comment"># add_relation_kind kind</span>
 
@@ -1039,7 +1084,7 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
 
           
           <div class="method-source-code" id="orchio_put_if_match-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 175</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 189</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_put_if_match</span>(<span class="ruby-identifier">document</span>, <span class="ruby-identifier">ref</span>)
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">inst_args</span>(<span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">document</span>, <span class="ruby-identifier">ref</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ref</span>)
   <span class="ruby-identifier">set_ref_value</span> <span class="ruby-identifier">response</span>
@@ -1074,7 +1119,7 @@ timestamp = { :start =&gt; start, :end =&gt; end }.</p>
 
           
           <div class="method-source-code" id="orchio_put_if_none_match-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 182</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchio_put_if_none_match</span>(<span class="ruby-identifier">document</span>)
   <span class="ruby-identifier">orchio_put_if_match</span>(<span class="ruby-identifier">document</span>, <span class="ruby-string">&#39;&quot;*&quot;&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1117,7 +1162,7 @@ this class.</p>
 
           
           <div class="method-source-code" id="cache-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 386</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 401</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cache</span>
   <span class="ruby-identifier">@@_cache</span>[<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1151,7 +1196,7 @@ clarity?  JMC</p>
 
           
           <div class="method-source-code" id="cache_request-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 391</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 406</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cache_request</span>
   <span class="ruby-identifier">cache</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1184,7 +1229,7 @@ clarity?  JMC</p>
 
           
           <div class="method-source-code" id="client-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 355</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 370</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">client</span>
   <span class="ruby-identifier">@@client</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Orchestrate</span><span class="ruby-operator">::</span><span class="ruby-constant">Application</span><span class="ruby-operator">::</span><span class="ruby-constant">Connect</span>.<span class="ruby-identifier">client</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1217,7 +1262,7 @@ clarity?  JMC</p>
 
           
           <div class="method-source-code" id="funkify-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 379</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 394</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">funkify</span>(<span class="ruby-identifier">etype_and_timestamp</span>)
   <span class="ruby-identifier">funky</span> = <span class="ruby-identifier">etype_and_timestamp</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-node">&quot;#{ocollection}#{id}&quot;</span>)
   <span class="ruby-identifier">funkier</span> = <span class="ruby-identifier">funky</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">shuffle</span>(<span class="ruby-identifier">random</span><span class="ruby-operator">:</span> <span class="ruby-identifier">funky</span>.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">join</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;_&#39;</span>)
@@ -1274,7 +1319,7 @@ in the model class definition.</p>
 
           
           <div class="method-source-code" id="init_collection_name-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 334</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 349</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_collection_name</span>(<span class="ruby-identifier">collection_name</span>)
   (<span class="ruby-identifier">collection_name</span>.<span class="ruby-identifier">blank?</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">tableize</span>)
                            <span class="ruby-operator">:</span> <span class="ruby-identifier">collection_name</span>
@@ -1309,7 +1354,7 @@ collection and key args.</p>
 
           
           <div class="method-source-code" id="inst_args-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 366</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 381</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">inst_args</span>(<span class="ruby-identifier">args</span>={})
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ocollection</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">:</span> <span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1343,7 +1388,7 @@ class.</p>
 
           
           <div class="method-source-code" id="ocollection-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 360</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 375</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ocollection</span>
   <span class="ruby-identifier">@@_collection</span>[<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>].<span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1377,7 +1422,7 @@ class.</p>
 
           
           <div class="method-source-code" id="set_ref_value-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 341</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 356</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_ref_value</span>(<span class="ruby-identifier">response</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">!=</span> <span class="ruby-value">201</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">etag</span>.<span class="ruby-identifier">blank?</span>
     <span class="ruby-ivar">@__ref_value__</span> = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">etag</span>
@@ -1413,7 +1458,7 @@ singleton instance.</p>
 
           
           <div class="method-source-code" id="simple_cache-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 396</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/record.rb, line 411</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">simple_cache</span>
   <span class="ruby-identifier">@@cache_store</span>
 <span class="ruby-keyword">end</span></pre>

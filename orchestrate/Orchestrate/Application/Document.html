@@ -184,7 +184,7 @@ within that namespace.</p>
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(orec, metadata)</span>
+            class="method-args">(key_value_pairs, metadata)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -201,9 +201,9 @@ the doc to cache when cache is enabled.</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/document.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">orec</span>, <span class="ruby-identifier">metadata</span>)
-  <span class="ruby-ivar">@key_value_pairs</span> = <span class="ruby-identifier">orec</span>
-  <span class="ruby-ivar">@metadata</span> = <span class="ruby-constant">Metadata</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">metadata</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">key_value_pairs</span>, <span class="ruby-identifier">metadata</span>)
+  <span class="ruby-ivar">@key_value_pairs</span> = <span class="ruby-identifier">key_value_pairs</span>
+  <span class="ruby-ivar">@metadata</span> = <span class="ruby-identifier">metadata</span>
   <span class="ruby-ivar">@id</span> = <span class="ruby-ivar">@metadata</span>.<span class="ruby-identifier">ref</span>
 
   <span class="ruby-identifier">save</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cache_enabled?</span>

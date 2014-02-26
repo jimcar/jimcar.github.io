@@ -80,6 +80,8 @@
     
     <li ><a href="#method-i-list">#list</a>
     
+    <li ><a href="#method-i-purge_key">#purge_key</a>
+    
     <li ><a href="#method-i-put_event">#put_event</a>
     
     <li ><a href="#method-i-put_graph">#put_graph</a>
@@ -224,7 +226,7 @@ send_request argument hash.</p>
 
           
           <div class="method-source-code" id="get_by_ref-source">
-            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 58</span>
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_by_ref</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">args</span>
 <span class="ruby-keyword">end</span></pre>
@@ -262,7 +264,7 @@ end }</p>
 
           
           <div class="method-source-code" id="get_events-source">
-            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 80</span>
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_events</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">args</span>
 <span class="ruby-keyword">end</span></pre>
@@ -297,7 +299,7 @@ end }</p>
 
           
           <div class="method-source-code" id="get_graph-source">
-            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 96</span>
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_graph</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">args</span>
 <span class="ruby-keyword">end</span></pre>
@@ -381,6 +383,41 @@ end }</p>
       </div>
 
     
+      <div id="method-i-purge_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">purge_key</span><span
+            class="method-args">(args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <ul><li>
+<p>required: { collection, key }</p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="purge_key-source">
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">purge_key</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">send_request</span> <span class="ruby-value">:delete</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;?purge=true&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-put_event" class="method-detail ">
         
         <div class="method-heading">
@@ -404,7 +441,7 @@ end }</p>
 
           
           <div class="method-source-code" id="put_event-source">
-            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 87</span>
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">put_event</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">send_request</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">args</span>
 <span class="ruby-keyword">end</span></pre>
@@ -439,7 +476,7 @@ end }</p>
 
           
           <div class="method-source-code" id="put_graph-source">
-            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 102</span>
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">put_graph</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">send_request</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">args</span>
 <span class="ruby-keyword">end</span></pre>
@@ -509,7 +546,7 @@ end }</p>
 
           
           <div class="method-source-code" id="put_key_if_match-source">
-            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 64</span>
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">put_key_if_match</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">send_request</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">args</span>
 <span class="ruby-keyword">end</span></pre>
@@ -544,7 +581,7 @@ end }</p>
 
           
           <div class="method-source-code" id="put_key_if_none_match-source">
-            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 70</span>
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">put_key_if_none_match</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">send_request</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">ref</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;&quot;*&quot;&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -581,7 +618,7 @@ end }</p>
           <div class="method-source-code" id="search-source">
             <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>(<span class="ruby-identifier">args</span>)
-  <span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;/?query=#{args[:query].gsub(/\s/, &#39;%20&#39;)}&quot;</span>)
+  <span class="ruby-identifier">send_request</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;?query=#{args[:query].gsub(/\s/, &#39;%20&#39;)}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

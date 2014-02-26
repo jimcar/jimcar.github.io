@@ -92,7 +92,7 @@ href="http://orchestrate.io/docs">orchestrate tutorial</a></strong>.</p>
 
 <p>Use the <strong><a href="https://dashboard.orchestrate.io">orchestrate.io
 dashboard</a></strong> to populate the film application with <strong><a
-href="https://github.com/jimcar/orchestrate-v0/blob/master/demo/orch-example-data.rb">sample
+href="https://github.com/jimcar/orchestrate-api-demo/blob/master/lib/example-data.rb">sample
 data</a></strong>.</p>
 
 <h4 id="module-Orchestrate::Rails::Tutorial::PopulateFilmsCollection-label-Method+2.+Download+the+orchestrate-api+demo">Method 2. Download the orchestrate-api demo<span><a href="#module-Orchestrate::Rails::Tutorial::PopulateFilmsCollection-label-Method+2.+Download+the+orchestrate-api+demo">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
@@ -103,16 +103,21 @@ data</a></strong>.</p>
 
 <p>Download the demo from github.</p>
 
-<pre>$ git clone git://github.com/jimcar/orchestrate/demo/api/api_demo.git</pre>
+<pre>$ git clone https://github.com/jimcar/orchestrate-api-demo.git api-demo</pre>
 
-<p>Copy the configuration file into the demo directory.</p>
+<p>If you created the configuration file in the previous step, copy it into
+the demo directory.  Otherwise, you can simply edit the demo&#39;s config
+file to insert your <strong>api-key</strong>.</p>
 
-<pre>$ cp &lt;path&gt;/orchestrate_config.json ./api_demo/orchestrate_config.json</pre>
+<pre>$ cp &lt;path&gt;/orchestrate_config.json ./api-demo/orchestrate_config.json</pre>
 
 <p>Run the demo from the command line:</p>
 
-<pre>$ cd ./api_demo
-$ ruby orchio_rails_demo.rb populate</pre>
+<pre>$ cd ./api-demo
+$ ruby orchestrate-demo.rb -populate</pre>
+
+<p>Note: Use the <strong>-show_response</strong> option to see the response
+data.</p>
 
 <h3 id="module-Orchestrate::Rails::Tutorial::PopulateFilmsCollection-label-Next">Next<span><a href="#module-Orchestrate::Rails::Tutorial::PopulateFilmsCollection-label-Next">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
