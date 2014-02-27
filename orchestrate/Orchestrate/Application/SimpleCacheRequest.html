@@ -167,7 +167,7 @@
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_request.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">collection</span>)
-  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;CACHE-init: &#39;#{collection}&#39;&quot;</span>
+  <span class="ruby-comment"># puts &quot;CACHE-init: &#39;#{collection}&#39;&quot;</span>
   <span class="ruby-ivar">@collection</span> = <span class="ruby-identifier">collection</span>
   <span class="ruby-identifier">@@cache_store</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">SimpleCacheStore</span>.<span class="ruby-identifier">instance</span>
 <span class="ruby-keyword">end</span></pre>

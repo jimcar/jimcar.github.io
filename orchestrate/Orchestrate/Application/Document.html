@@ -351,7 +351,7 @@ Defined by <a href="../Rails.html">Orchestrate::Rails</a>.</p>
           <div class="method-source-code" id="to_event-source">
             <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/document.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_event</span>
-        <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-string">&#39;Orchestrate::Rails::Event&#39;</span>).<span class="ruby-identifier">new</span> <span class="ruby-identifier">key_value_pairs</span>
+  <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-string">&#39;Orchestrate::Rails::Event&#39;</span>).<span class="ruby-identifier">new</span> <span class="ruby-identifier">key_value_pairs</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -420,11 +420,11 @@ the document. Defined by <a href="../Rails.html">Orchestrate::Rails</a>.</p>
           <div class="method-source-code" id="update_rails-source">
             <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/document.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_rails</span>(<span class="ruby-identifier">instance</span>)
-        <span class="ruby-identifier">key_value_pairs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-node">&quot;@#{k.to_orchio_rails_attr}&quot;</span>, <span class="ruby-identifier">v</span>
-        }
-        <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-string">&quot;@__ref_value__&quot;</span>, <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">ref</span> <span class="ruby-comment"># JMC</span>
-        <span class="ruby-identifier">instance</span>
+  <span class="ruby-identifier">key_value_pairs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-node">&quot;@#{k.to_orchio_rails_attr}&quot;</span>, <span class="ruby-identifier">v</span>
+  }
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-string">&quot;@__ref_value__&quot;</span>, <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">ref</span> <span class="ruby-comment"># JMC</span>
+  <span class="ruby-identifier">instance</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

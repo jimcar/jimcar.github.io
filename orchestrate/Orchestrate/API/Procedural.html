@@ -68,6 +68,8 @@
     
     <li ><a href="#method-i-delete_collection">#delete_collection</a>
     
+    <li ><a href="#method-i-delete_graph">#delete_graph</a>
+    
     <li ><a href="#method-i-delete_key">#delete_key</a>
     
     <li ><a href="#method-i-get_by_ref">#get_by_ref</a>
@@ -159,6 +161,41 @@ send_request argument hash.</p>
             <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_collection</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">send_request</span> <span class="ruby-value">:delete</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;?force=true&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-delete_graph" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_graph</span><span
+            class="method-args">(args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <ul><li>
+<p>required: { collection, key, kind, to_collection, to_key }</p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_graph-source">
+            <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_graph</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">send_request</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;?purge=true&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
