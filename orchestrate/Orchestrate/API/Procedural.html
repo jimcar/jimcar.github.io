@@ -195,7 +195,7 @@ send_request argument hash.</p>
           <div class="method-source-code" id="delete_graph-source">
             <pre><span class="ruby-comment"># File api/lib/orchestrate_api/procedural.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_graph</span>(<span class="ruby-identifier">args</span>)
-  <span class="ruby-identifier">send_request</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;?purge=true&quot;</span>)
+  <span class="ruby-identifier">send_request</span> <span class="ruby-value">:delete</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">path</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;?purge=true&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
