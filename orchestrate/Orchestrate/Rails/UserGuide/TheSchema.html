@@ -95,8 +95,8 @@ snake_case, rails-style <em>attribute</em> names.</p>
 
 <p><strong>orchestrate-rails</strong> models use the <strong>id</strong>
 attribute as the <em>primary_key</em> when accessing orchestrate.io
-collections. The application is responsible for initializing the value of
-the id attribute when adding new data to a collection.</p>
+collections. The rails application is responsible for initializing the
+value of the id attribute when adding new data to a collection.</p>
 
 <h4 id="module-Orchestrate::Rails::UserGuide::TheSchema-label-The+schema">The schema<span><a href="#module-Orchestrate::Rails::UserGuide::TheSchema-label-The+schema">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
@@ -108,14 +108,14 @@ attribute names, and vice-versa.</p>
 collection from the orchestrate.io tutorial:</p>
 
 <pre class="ruby"><span class="ruby-constant">Orchestrate</span><span class="ruby-operator">::</span><span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span>.<span class="ruby-identifier">define_collection</span>(
-  :<span class="ruby-identifier">name</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;films&#39;</span>,
-  :<span class="ruby-identifier">classname</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Film&#39;</span>,
-  :<span class="ruby-identifier">properties</span>     =<span class="ruby-operator">&gt;</span> [ :<span class="ruby-constant">Title</span>, :<span class="ruby-constant">Year</span>, :<span class="ruby-constant">Rated</span>, :<span class="ruby-constant">Released</span>,
-                       :<span class="ruby-constant">Runtime</span>, :<span class="ruby-constant">Genre</span>, :<span class="ruby-constant">Director</span>, :<span class="ruby-constant">Writer</span>,
-                       :<span class="ruby-constant">Actors</span>, :<span class="ruby-constant">Plot</span>, :<span class="ruby-constant">Poster</span>, :<span class="ruby-identifier">imdbRating</span>,
-                       :<span class="ruby-identifier">imdbVotes</span>, :<span class="ruby-identifier">imdbID</span>, :<span class="ruby-constant">Type</span>, :<span class="ruby-constant">Response</span> ],
-  :<span class="ruby-identifier">event_types</span>    =<span class="ruby-operator">&gt;</span> [ :<span class="ruby-identifier">comments</span> ],
-  :<span class="ruby-identifier">graphs</span>         =<span class="ruby-operator">&gt;</span> [ :<span class="ruby-identifier">sequel</span> ],
+  :<span class="ruby-identifier">name</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;films&#39;</span>,
+  :<span class="ruby-identifier">classname</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Film&#39;</span>,
+  :<span class="ruby-identifier">properties</span>  =<span class="ruby-operator">&gt;</span> [ :<span class="ruby-constant">Title</span>, :<span class="ruby-constant">Year</span>, :<span class="ruby-constant">Rated</span>, :<span class="ruby-constant">Released</span>,
+                    :<span class="ruby-constant">Runtime</span>, :<span class="ruby-constant">Genre</span>, :<span class="ruby-constant">Director</span>, :<span class="ruby-constant">Writer</span>,
+                    :<span class="ruby-constant">Actors</span>, :<span class="ruby-constant">Plot</span>, :<span class="ruby-constant">Poster</span>, :<span class="ruby-identifier">imdbRating</span>,
+                    :<span class="ruby-identifier">imdbVotes</span>, :<span class="ruby-identifier">imdbID</span>, :<span class="ruby-constant">Type</span>, :<span class="ruby-constant">Response</span> ],
+  :<span class="ruby-identifier">event_types</span> =<span class="ruby-operator">&gt;</span> [ :<span class="ruby-identifier">comments</span> ],
+  :<span class="ruby-identifier">graphs</span>      =<span class="ruby-operator">&gt;</span> [ :<span class="ruby-identifier">sequel</span> ],
 )
 
 <span class="ruby-constant">Orchestrate</span><span class="ruby-operator">::</span><span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span>.<span class="ruby-identifier">define_event_type</span>(
