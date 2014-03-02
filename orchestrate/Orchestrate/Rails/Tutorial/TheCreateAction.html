@@ -102,6 +102,12 @@ to add the <code>new</code> and <code>create</code> actions, along with the
 private methods <strong>attributes</strong> and
 <strong>generate_primary_key</strong>.</p>
 
+<p>The rails application is responsible for setting the value of the
+<strong>id</strong> attribute when updating the collection with newly
+created data. In this example, we&#39;ll use
+<strong>generate_primary_key</strong> to derive the <em>primary_key</em>
+from the film title, subsequently using the value to set the id attribute.</p>
+
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">FilmsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
 
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
@@ -110,12 +116,9 @@ private methods <strong>attributes</strong> and
 
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
     <span class="ruby-ivar">@film</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">find</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>]
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_results</span>
-    <span class="ruby-identifier">query_str</span> = (<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">query_str</span>].<span class="ruby-identifier">blank?</span>) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;*&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">query_str</span>]
-    <span class="ruby-ivar">@title</span> = <span class="ruby-node">&quot;Search results for &#39;#{query_str}&#39;&quot;</span>
-    <span class="ruby-ivar">@films</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">search_results</span>(<span class="ruby-identifier">query_str</span>)
+    <span class="ruby-ivar">@comments</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">comments</span>
+    <span class="ruby-ivar">@sequels</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">sequels</span>
+    <span class="ruby-ivar">@spawn_of_sequels</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">spawn_of_sequels</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>

@@ -122,6 +122,19 @@
         </div>
       </div>
       
+      <div id="attribute-i-content" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">content</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-etag" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">etag</span><span
@@ -190,11 +203,12 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_response.rb, line 16</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_response.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">header</span>)
   <span class="ruby-ivar">@locations</span> = <span class="ruby-identifier">header</span>[<span class="ruby-value">:locations</span>]
   <span class="ruby-ivar">@code</span>, <span class="ruby-ivar">@status</span> = <span class="ruby-identifier">header</span>[<span class="ruby-value">:code</span>], <span class="ruby-identifier">header</span>[<span class="ruby-value">:status</span>]
   <span class="ruby-ivar">@etag</span> = <span class="ruby-identifier">header</span>[<span class="ruby-value">:etag</span>]
+  <span class="ruby-ivar">@content</span> = {}
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -233,7 +247,7 @@
 
           
           <div class="method-source-code" id="location-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_response.rb, line 22</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_response.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">location</span>
   <span class="ruby-identifier">locations</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>

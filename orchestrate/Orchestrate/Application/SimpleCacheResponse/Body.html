@@ -109,6 +109,32 @@
       </header>
 
       
+      <div id="attribute-i-content" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">content</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-count" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">count</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-documents" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">documents</span><span
@@ -151,9 +177,11 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_response.rb, line 30</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_response.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">body</span>)
   <span class="ruby-ivar">@documents</span> = <span class="ruby-identifier">body</span>
+  <span class="ruby-ivar">@count</span> = <span class="ruby-identifier">documents</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-ivar">@content</span> = <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -192,7 +220,7 @@
 
           
           <div class="method-source-code" id="document-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_response.rb, line 34</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_application/simple_cache_response.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">document</span>
   <span class="ruby-identifier">documents</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>

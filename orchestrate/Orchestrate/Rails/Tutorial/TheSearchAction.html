@@ -63,6 +63,7 @@
     <li><a href="#module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Adding+the+search_results+action+to+the+films+controller.">Adding the <code>search_results</code> action to the <em>films</em> controller.</a>
     <li><a href="#module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Adding+a+search+form+to+the+index+view.">Adding a search form to the <code>index</code> view.</a>
     <li><a href="#module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Adding+the+view+for+search_results">Adding the view for search_results</a>
+    <li><a href="#module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Try+it+out">Try it out</a>
     <li><a href="#module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Next">Next</a>
   </ul>
 </div>
@@ -101,21 +102,43 @@ Parser Syntax.</p>
 <p>Update <code>&lt;rails-root&gt;/app/controllers/films_controller.rb</code>,
 to add the <code>search_results</code> action:</p>
 
-<pre class="ruby"> <span class="ruby-keyword">class</span> <span class="ruby-constant">FilmsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">FilmsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
 
-   <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-     <span class="ruby-ivar">@films</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">all</span>
-   <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-ivar">@films</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">end</span>
 
-   <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-     <span class="ruby-ivar">@film</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">find</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>]
-   <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+    <span class="ruby-ivar">@film</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">find</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>]
+    <span class="ruby-ivar">@comments</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">comments</span>
+    <span class="ruby-ivar">@sequels</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">sequels</span>
+    <span class="ruby-ivar">@spawn_of_sequels</span> = <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">spawn_of_sequels</span>
+  <span class="ruby-keyword">end</span>
 
-   <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_results</span>
-     <span class="ruby-identifier">query_str</span> = (<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">query_str</span>].<span class="ruby-identifier">blank?</span>) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;*&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">query_str</span>]
-     <span class="ruby-ivar">@title</span> = <span class="ruby-node">&quot;Search results for &#39;#{query_str}&#39;&quot;</span>
-     <span class="ruby-ivar">@films</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">search_results</span>(<span class="ruby-identifier">query_str</span>)
-   <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@film</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+    <span class="ruby-ivar">@film</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">create!</span> <span class="ruby-identifier">attributes</span>
+    <span class="ruby-identifier">redirect_to</span> :<span class="ruby-identifier">action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;show&#39;</span>, :<span class="ruby-identifier">id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@film</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_results</span>
+    <span class="ruby-identifier">query_str</span> = (<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">query_str</span>].<span class="ruby-identifier">blank?</span>) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;*&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">query_str</span>]
+    <span class="ruby-ivar">@title</span> = <span class="ruby-node">&quot;Search results for &#39;#{query_str}&#39;&quot;</span>
+    <span class="ruby-ivar">@films</span> = <span class="ruby-constant">Film</span>.<span class="ruby-identifier">search_results</span>(<span class="ruby-identifier">query_str</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-comment"># &quot;The Godfather:Part IV&quot; --&gt; &quot;the_godfather_part_iv&quot;</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_primary_key</span>
+      <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">film</span>][:<span class="ruby-identifier">title</span>].<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;: &#39;</span>, <span class="ruby-string">&#39;_&#39;</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
+      <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">film</span>].<span class="ruby-identifier">merge</span>(:<span class="ruby-identifier">id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">generate_primary_key</span>)
+    <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span>
 </pre>
 
@@ -155,6 +178,15 @@ shown:</p>
 <pre>%ul.films.list-group
  %li.list-group-item
   = render partial: &#39;films/film_list&#39;, locals: { title: @title, films: @films }</pre>
+
+<h4 id="module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Try+it+out">Try it out<span><a href="#module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Try+it+out">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<p>Navigate to the home page and try a couple of searches.</p>
+
+<p><strong>orchestrate-rails</strong> supports search by <em>property</em>
+names , as shown in the <strong><a
+href="http://tutorials.orchestrate.io/welcome-series/part-3-search.html">orchestrate.io
+search tutorial</a></strong> , and by model <em>attribute</em> names.</p>
 
 <h3 id="module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Next">Next<span><a href="#module-Orchestrate::Rails::Tutorial::TheSearchAction-label-Next">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
 
