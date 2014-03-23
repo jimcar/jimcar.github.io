@@ -75,6 +75,18 @@
   
   
   
+    <li><span class="include">::ActiveModel::Serialization</span>
+  
+  
+  
+    <li><span class="include">::ActiveModel::Serializers</span>
+  
+  
+  
+    <li><span class="include">::ActiveModel::Serializers::JSON</span>
+  
+  
+  
     <li><span class="include">::ActiveModel::Conversion</span>
   
   
@@ -177,6 +189,10 @@
     
     <li ><a href="#method-i-orchestrate_ref_value">#orchestrate_ref_value</a>
     
+    <li ><a href="#method-i-read_attribute_for_serialization">#read_attribute_for_serialization</a>
+    
+    <li ><a href="#method-i-read_attribute_for_validation">#read_attribute_for_validation</a>
+    
     <li ><a href="#method-i-retval">#retval</a>
     
     <li ><a href="#method-i-save">#save</a>
@@ -254,7 +270,7 @@ up a mapping between the model and an Orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="all-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 340</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 351</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">list</span>
   (<span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">results</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
@@ -288,7 +304,7 @@ up a mapping between the model and an Orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="attributes-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 282</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 293</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">attributes</span>
   <span class="ruby-identifier">new</span>.<span class="ruby-identifier">attributes</span>
 <span class="ruby-keyword">end</span></pre>
@@ -321,7 +337,7 @@ up a mapping between the model and an Orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="attrs-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 278</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 289</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">attrs</span>
   <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">attrs</span> <span class="ruby-identifier">ocollection</span>
 <span class="ruby-keyword">end</span></pre>
@@ -357,7 +373,7 @@ already present in the collection.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 306</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 317</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">key_value_pairs</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">key_value_pairs</span>).<span class="ruby-identifier">save_if_none_match</span>
 <span class="ruby-keyword">end</span></pre>
@@ -392,7 +408,7 @@ already present in the collection.</p>
 
           
           <div class="method-source-code" id="create-21-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 313</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 324</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-identifier">key_value_pairs</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">key_value_pairs</span>).<span class="ruby-identifier">save!</span>
 <span class="ruby-keyword">end</span></pre>
@@ -427,7 +443,7 @@ already present in the collection.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 320</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 331</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">destroy</span>(<span class="ruby-identifier">id</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>).<span class="ruby-identifier">destroy</span>
 <span class="ruby-keyword">end</span></pre>
@@ -463,7 +479,7 @@ data</strong> from the collection.</p>
 
           
           <div class="method-source-code" id="destroy-21-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 328</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 339</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">destroy!</span>(<span class="ruby-identifier">id</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>).<span class="ruby-identifier">destroy!</span>
 <span class="ruby-keyword">end</span></pre>
@@ -498,7 +514,7 @@ data</strong> from the collection.</p>
 
           
           <div class="method-source-code" id="destroy_all-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 335</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 346</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">destroy_all</span>
   <span class="ruby-identifier">orchio_delete</span> <span class="ruby-identifier">ocollection</span>
 <span class="ruby-keyword">end</span></pre>
@@ -532,7 +548,7 @@ collection.</p>
 
           
           <div class="method-source-code" id="exists-3F-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 364</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 375</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">id</span>)
   <span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -567,7 +583,7 @@ collection.</p>
 
           
           <div class="method-source-code" id="find-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 371</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 382</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">arg</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>
     <span class="ruby-identifier">new</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">arg</span>).<span class="ruby-identifier">get</span>
@@ -604,7 +620,7 @@ collection.</p>
 
           
           <div class="method-source-code" id="find_by-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 385</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 396</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">key_value_pairs</span>)
   <span class="ruby-identifier">where</span>(<span class="ruby-identifier">key_value_pairs</span>).<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
@@ -643,11 +659,11 @@ executed as:</p>
 
           
           <div class="method-source-code" id="find_by_method-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 395</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 406</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_by_method</span>(<span class="ruby-identifier">myattrs</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">attrs_with_args</span> = [<span class="ruby-identifier">myattrs</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;_and_&#39;</span>), <span class="ruby-identifier">args</span>].<span class="ruby-identifier">transpose</span>
   <span class="ruby-identifier">attrs_with_args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">awa</span><span class="ruby-operator">|</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">awa</span>.<span class="ruby-identifier">first</span> }
-  <span class="ruby-identifier">find_by</span> <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">attr_with_args</span>]
+  <span class="ruby-identifier">find_by</span> <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">attrs_with_args</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -678,7 +694,7 @@ executed as:</p>
 
           
           <div class="method-source-code" id="first-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 346</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 357</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">first</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">list</span>(<span class="ruby-value">1</span>)
   (<span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
@@ -712,7 +728,7 @@ executed as:</p>
 
           
           <div class="method-source-code" id="last-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 352</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 363</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">last</span>
   <span class="ruby-identifier">all</span>.<span class="ruby-identifier">last</span>
 <span class="ruby-keyword">end</span></pre>
@@ -750,7 +766,7 @@ in the collection.</p>
 
           
           <div class="method-source-code" id="list-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 460</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 471</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">list</span>(<span class="ruby-identifier">limit</span>=<span class="ruby-value">:all</span>, <span class="ruby-identifier">start_key</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">after_key</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit</span> <span class="ruby-operator">==</span> <span class="ruby-value">:all</span>
     <span class="ruby-identifier">total_count</span> = <span class="ruby-value">0</span>
@@ -813,7 +829,7 @@ in the collection.</p>
 
           
           <div class="method-source-code" id="method_missing-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 402</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 413</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^find_by_(.+)$/</span>
     <span class="ruby-identifier">find_by_method</span>(<span class="ruby-node">$1</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
@@ -860,7 +876,7 @@ then initializes the @attributes instance variable.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 23</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">params</span>={})<span class="ruby-keyword">super</span>(<span class="ruby-identifier">params</span>)
   <span class="ruby-comment"># Define accessor and query methods for each attribute.</span>
   <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span><span class="ruby-operator">|</span>
@@ -916,9 +932,9 @@ href="../../String.html#method-i-to_orchio_rails_attr">String#to_orchio_rails_at
 
           
           <div class="method-source-code" id="properties-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 295</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 306</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">properties</span>
-  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">properties</span> <span class="ruby-identifier">ocollection</span>
+  <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">properties</span>(<span class="ruby-identifier">ocollection</span>).<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">prop</span><span class="ruby-operator">|</span> <span class="ruby-identifier">prop</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/id/i</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -951,7 +967,7 @@ href="../../String.html#method-i-to_orchio_rails_attr">String#to_orchio_rails_at
 
           
           <div class="method-source-code" id="qmap-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 273</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 284</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">qmap</span>
   <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">qmap</span> <span class="ruby-identifier">ocollection</span>
 <span class="ruby-keyword">end</span></pre>
@@ -989,7 +1005,7 @@ href="../../String.html#method-i-to_orchio_rails_attr">String#to_orchio_rails_at
 
           
           <div class="method-source-code" id="respond_to-3F-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 411</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 422</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">name</span>)
   (<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^find_by_.*$/</span>) <span class="ruby-keyword">or</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1023,7 +1039,7 @@ implements Lucene Query Parser Syntax.</p>
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 425</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 436</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">query_str</span>, <span class="ruby-identifier">limit</span>=<span class="ruby-value">:all</span>, <span class="ruby-identifier">offset</span>=<span class="ruby-value">0</span>)
   <span class="ruby-identifier">query_str</span> = <span class="ruby-identifier">orchio_query_str</span>(<span class="ruby-identifier">query_str</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">query_str</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;*&#39;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit</span> <span class="ruby-operator">==</span> <span class="ruby-value">:all</span>
@@ -1082,7 +1098,7 @@ implements Lucene Query Parser Syntax.</p>
 
           
           <div class="method-source-code" id="search_results-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 418</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 429</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search_results</span>(<span class="ruby-identifier">query_str</span>)
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">search</span>(<span class="ruby-identifier">query_str</span>)
   (<span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">results</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
@@ -1116,7 +1132,7 @@ implements Lucene Query Parser Syntax.</p>
 
           
           <div class="method-source-code" id="take-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 357</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 368</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">take</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">search</span>(<span class="ruby-string">&#39;*&#39;</span>, <span class="ruby-value">1</span>)
   (<span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
@@ -1150,7 +1166,7 @@ implements Lucene Query Parser Syntax.</p>
 
           
           <div class="method-source-code" id="where-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 380</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 391</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">key_value_pairs</span>)
   <span class="ruby-identifier">search_results</span>(<span class="ruby-identifier">key_value_pairs</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{k}:#{v}&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; AND &#39;</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1193,7 +1209,7 @@ in the collection.</p>
 
           
           <div class="method-source-code" id="orchio_query_str-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 506</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 517</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">orchio_query_str</span>(<span class="ruby-identifier">query_str</span>)
   <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">query_str</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^(\w+):/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">first</span> } <span class="ruby-operator">+</span>
          <span class="ruby-identifier">query_str</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\s(\w+):/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">first</span> }
@@ -1229,7 +1245,7 @@ in the collection.</p>
 
           
           <div class="method-source-code" id="schema-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 499</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 510</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">schema</span>
   <span class="ruby-identifier">@@schema</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Schema</span>.<span class="ruby-identifier">instance</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1270,11 +1286,9 @@ in the collection.</p>
 
           
           <div class="method-source-code" id="attributes-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 50</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
   <span class="ruby-ivar">@attributes</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{a}&quot;</span>)] }]
-  <span class="ruby-comment"># @attributes =</span>
-  <span class="ruby-comment">#   Hash[attrs.map { |a| [a.to_sym, instance_variable_get(&quot;@#{a}&quot;)] }]</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1305,7 +1319,7 @@ in the collection.</p>
 
           
           <div class="method-source-code" id="attrs-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 45</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attrs</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">attrs</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1342,7 +1356,7 @@ collection.</p>
 
           
           <div class="method-source-code" id="create_event-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 204</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 215</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_event</span>(<span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">event_rec</span>)
   <span class="ruby-identifier">save_event</span> <span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">event_rec</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1377,7 +1391,7 @@ collection.</p>
 
           
           <div class="method-source-code" id="delete_graph-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 233</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 244</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_graph</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">to_collection</span>, <span class="ruby-identifier">to_key</span>)
   <span class="ruby-identifier">retval</span> <span class="ruby-identifier">orchio_delete_graph</span> <span class="ruby-identifier">kind</span>, <span class="ruby-identifier">to_collection</span>, <span class="ruby-identifier">to_key</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1404,7 +1418,8 @@ collection.</p>
 
         <div class="method-description">
           
-          <p>Deletes the current primary_key from the collection.</p>
+          <p>Deletes the current primary_key from the collection. Calls <a
+href="../Application/Record.html#method-i-orchio_delete">orchio_delete</a></p>
 
 <p>Returns boolean status.</p>
           
@@ -1412,7 +1427,7 @@ collection.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 165</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">orchio_delete</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1448,7 +1463,7 @@ data</strong> from the collection.</p>
 
           
           <div class="method-source-code" id="destroy-21-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 173</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy!</span>
   <span class="ruby-identifier">orchio_purge</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1485,7 +1500,7 @@ end }</p>
 
           
           <div class="method-source-code" id="events-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 189</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 200</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">events</span>(<span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span>={})
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">orchio_get_events</span>(<span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span>)
   (<span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">odoc</span><span class="ruby-operator">|</span> <span class="ruby-identifier">odoc</span>.<span class="ruby-identifier">to_event</span> } <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
@@ -1519,7 +1534,7 @@ end }</p>
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 91</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">orchio_get</span>
   (<span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">update_rails</span>(<span class="ruby-keyword">self</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
@@ -1554,7 +1569,7 @@ end }</p>
 
           
           <div class="method-source-code" id="get_by_ref-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 98</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_by_ref</span>(<span class="ruby-identifier">ref</span>)
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">orchio_get_by_ref</span> <span class="ruby-identifier">ref</span>
   (<span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">update_rails</span>(<span class="ruby-keyword">self</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
@@ -1588,7 +1603,7 @@ end }</p>
 
           
           <div class="method-source-code" id="graph-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 218</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 229</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">graph</span>(<span class="ruby-identifier">kind</span>)
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">orchio_get_graph</span>(<span class="ruby-identifier">kind</span>)
   (<span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">odoc</span><span class="ruby-operator">|</span> <span class="ruby-identifier">odoc</span>.<span class="ruby-identifier">to_rails</span> } <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
@@ -1622,7 +1637,7 @@ end }</p>
 
           
           <div class="method-source-code" id="orchestrate_collection_name-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 66</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchestrate_collection_name</span>
   <span class="ruby-identifier">ocollection</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1657,9 +1672,75 @@ primary_key data in an orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="orchestrate_ref_value-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 73</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">orchestrate_ref_value</span>
   <span class="ruby-identifier">__ref_value__</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-read_attribute_for_serialization" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_attribute_for_serialization</span><span
+            class="method-args">(attribute)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Called by ActiveModel::Serialization</p>
+          
+          
+
+          
+          <div class="method-source-code" id="read_attribute_for_serialization-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_attribute_for_serialization</span>(<span class="ruby-identifier">attribute</span>)
+  <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{attribute}&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-read_attribute_for_validation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_attribute_for_validation</span><span
+            class="method-args">(attribute)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Called by ActiveModel::Validation</p>
+          
+          
+
+          
+          <div class="method-source-code" id="read_attribute_for_validation-source">
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_attribute_for_validation</span>(<span class="ruby-identifier">attribute</span>)
+  <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{attribute}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1690,7 +1771,7 @@ primary_key data in an orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="save-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 124</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-identifier">save_if_match</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1725,7 +1806,7 @@ primary_key data in an orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="save-21-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 131</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save!</span>
   <span class="ruby-identifier">status</span> = <span class="ruby-identifier">orchio_put</span>(<span class="ruby-identifier">to_json_direct</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">valid?</span>
   <span class="ruby-identifier">retval</span> <span class="ruby-identifier">status</span>
@@ -1761,7 +1842,7 @@ primary_key data in an orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="save_event-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 197</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save_event</span>(<span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">event</span>)
   <span class="ruby-identifier">retval</span> <span class="ruby-identifier">orchio_put_event</span>(<span class="ruby-identifier">event_type</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">event</span>.<span class="ruby-identifier">to_json</span>), <span class="ruby-identifier">event</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1796,9 +1877,9 @@ primary_key data in an orchestrate.io collection.</p>
 
           
           <div class="method-source-code" id="save_graph-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 226</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 237</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save_graph</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">to_collection</span>, <span class="ruby-identifier">to_key</span>)
-  <span class="ruby-identifier">retval</span> <span class="ruby-identifier">orchio_put_graph</span> <span class="ruby-identifier">kind</span>, <span class="ruby-identifier">to_collection</span>, <span class="ruby-identifier">to_key</span>
+  <span class="ruby-identifier">retval</span> <span class="ruby-identifier">orchio_put_graph</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">to_collection</span>, <span class="ruby-identifier">to_key</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1833,7 +1914,7 @@ primary_key in the collection.</p>
 
           
           <div class="method-source-code" id="save_if_match-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 118</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save_if_match</span>
   <span class="ruby-identifier">status</span> = <span class="ruby-identifier">orchio_put_if_match</span>(<span class="ruby-identifier">to_json_direct</span>, <span class="ruby-identifier">__ref_value__</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">valid?</span>
   <span class="ruby-identifier">retval</span> <span class="ruby-identifier">status</span>
@@ -1870,7 +1951,7 @@ does not exist in the collection.</p>
 
           
           <div class="method-source-code" id="save_if_none_match-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 107</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save_if_none_match</span>
   <span class="ruby-identifier">status</span> = <span class="ruby-identifier">orchio_put_if_none_match</span>(<span class="ruby-identifier">to_json_direct</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">valid?</span>
   <span class="ruby-identifier">retval</span> <span class="ruby-identifier">status</span>
@@ -1905,7 +1986,7 @@ href="Model.html#method-i-save_if_match">save_if_match</a>.</p>
 
           
           <div class="method-source-code" id="update_attribute-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 137</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_attribute</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">instance_variable_set</span> <span class="ruby-node">&quot;@#{key}&quot;</span>, <span class="ruby-identifier">value</span>
   <span class="ruby-identifier">save_if_match</span>
@@ -1940,7 +2021,7 @@ href="Model.html#method-i-save_if_match">save_if_match</a>.</p>
 
           
           <div class="method-source-code" id="update_attributes-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 143</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">key_value_pairs</span>)
   <span class="ruby-identifier">key_value_pairs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">instance_variable_set</span> <span class="ruby-node">&quot;@#{k}&quot;</span>, <span class="ruby-identifier">v</span> }
   <span class="ruby-identifier">save_if_match</span>
@@ -1982,7 +2063,7 @@ href="Model.html#method-i-save_if_match">save_if_match</a>.</p>
 
           
           <div class="method-source-code" id="define_attr_query-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 241</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 252</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">define_attr_query</span>(<span class="ruby-identifier">attribute</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">:define_method</span>, <span class="ruby-node">&quot;#{attribute}?&quot;</span> <span class="ruby-keyword">do</span>
     <span class="ruby-operator">!</span><span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{attribute}&quot;</span>).<span class="ruby-identifier">blank?</span>
@@ -2017,7 +2098,7 @@ href="Model.html#method-i-save_if_match">save_if_match</a>.</p>
 
           
           <div class="method-source-code" id="retval-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 81</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">retval</span>(<span class="ruby-identifier">status</span>, <span class="ruby-identifier">obj</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
     (<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">blank?</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>
@@ -2055,7 +2136,7 @@ used by the model with the property names used in the collection.</p>
 
           
           <div class="method-source-code" id="to_json_direct-source">
-            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 250</span>
+            <pre><span class="ruby-comment"># File rails/lib/orchestrate_rails/model.rb, line 261</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_json_direct</span>
   <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">qmap</span>[<span class="ruby-identifier">a</span>], <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{a}&quot;</span>)] }].<span class="ruby-identifier">to_json</span>
 <span class="ruby-keyword">end</span></pre>
